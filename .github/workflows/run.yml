@@ -3,8 +3,9 @@ name: "SMZDM Check-in Bot"
 on:
   workflow_dispatch:
 
-#  schedule:
-#    - cron: "0 1 * * *"
+  schedule:
+    # 09:17 China Standard Time (01:17 UTC)
+    - cron: "17 1 * * *"
 
 env:
   TZ: Asia/Shanghai
