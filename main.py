@@ -45,7 +45,10 @@ class SMZDM_Bot(object):
 
     def checkin(self):
         url = "https://zhiyou.smzdm.com/user/checkin/jsonp_checkin"
-        resp = self.session.get(url)
+        resp = self.session.get(url, timeout=30)
+        logger.info("Check-in HTTP status: {}", resp.status_code)
+        if resp.status_code == 200:
+            logger.info("Check-in error_code: {}", resp.json().get("error_code"))
         if resp.status_code == 200 and resp.json()["error_code"] == 0:
             resp_data = resp.json()["data"]
             checkin_num = resp_data["checkin_num"]
@@ -69,7 +72,7 @@ class SMZDM_Bot(object):
             return msg
         else:
             logger.error("Faile to sign in, 签到失败" + MANUAL_ERR_MSG)
-            msg = MANUAL_ERR_MSG
+            return MANUAL_ERR_MSG
 
 def main():
     smzdm_bot = SMZDM_Bot()
