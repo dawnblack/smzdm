@@ -1,9 +1,6 @@
 name: "SMZDM Check-in Bot"
 
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/run.yml']
   workflow_dispatch:
 
   schedule:
